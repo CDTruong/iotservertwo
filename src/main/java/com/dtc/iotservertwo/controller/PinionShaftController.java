@@ -21,6 +21,7 @@ import com.dtc.iotservertwo.model.MachineProductionData;
 import com.dtc.iotservertwo.model.MachineProductionInfo;
 import com.dtc.iotservertwo.model.PinionShaft;
 import com.dtc.iotservertwo.model.PinionShaftJudgmentValue;
+import com.dtc.iotservertwo.model.PinionShaftLeftRightMeasureValue;
 import com.dtc.iotservertwo.model.PinionShaftMeasureValue;
 import com.dtc.iotservertwo.repository.MachinesRepository;
 import com.dtc.iotservertwo.repository.PinionShaftRepository;
@@ -57,6 +58,14 @@ public class PinionShaftController {
 	@GetMapping("pinionshaftmeasurevalueright")
 	public List<PinionShaftMeasureValue> getMeasureValueRight() {
 		return pinionShaftRepository.findBySideAndReturnMeasureValueAndTime(1,PageRequest.of(0, 50, Sort.by(Direction.DESC, "time")));
+	}
+	
+	@GetMapping("pinionshaft-left-right")
+	public PinionShaftLeftRightMeasureValue getMeasureLeftRight() {
+		PinionShaftLeftRightMeasureValue pinionLeftRightMeasureValue = new PinionShaftLeftRightMeasureValue();
+		pinionLeftRightMeasureValue.setLeft(getMeasureValueLeft());
+		pinionLeftRightMeasureValue.setRight(getMeasureValueRight());
+		return pinionLeftRightMeasureValue;
 	}
 	
 	@GetMapping("pinionshaft-judgment")
@@ -137,7 +146,15 @@ public class PinionShaftController {
 		}	
 		
 		return pinionShaftProductionNgJudgmentList;
-	}	
+	}
+	
+	@GetMapping("pinionshaft-judgment-ok-ng")
+	public List<List<MachineProductionData>> pinionShaftProductOkNgJudgment() throws ParseException {
+		List<List<MachineProductionData>> pinionShaftProductOkNgJudgmentList = new ArrayList<List<MachineProductionData>>();
+		pinionShaftProductOkNgJudgmentList.add(getOkJudgment());
+		pinionShaftProductOkNgJudgmentList.add(getNgJudgment());
+		return pinionShaftProductOkNgJudgmentList;
+	}
 	
 	public String firstTwo(String str) {
 	    return str.length() < 2 ? str : str.substring(0, 2);
