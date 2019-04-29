@@ -23,6 +23,7 @@ import com.dtc.iotservertwo.model.PinionShaft;
 import com.dtc.iotservertwo.model.PinionShaftJudgmentValue;
 import com.dtc.iotservertwo.model.PinionShaftLeftRightMeasureValue;
 import com.dtc.iotservertwo.model.PinionShaftMeasureValue;
+import com.dtc.iotservertwo.model.PinionShaftProductionValue;
 import com.dtc.iotservertwo.repository.MachinesRepository;
 import com.dtc.iotservertwo.repository.PinionShaftRepository;
 
@@ -36,6 +37,9 @@ public class PinionShaftController {
 
 	@Autowired
 	MachinesRepository machinesRepository;
+	
+	@Autowired
+	MachineController machineController;
 	
 	@GetMapping("pinionshaft")
 	public List<PinionShaft> get() {
@@ -149,11 +153,12 @@ public class PinionShaftController {
 	}
 	
 	@GetMapping("pinionshaft-judgment-ok-ng")
-	public List<List<MachineProductionData>> pinionShaftProductOkNgJudgment() throws ParseException {
-		List<List<MachineProductionData>> pinionShaftProductOkNgJudgmentList = new ArrayList<List<MachineProductionData>>();
-		pinionShaftProductOkNgJudgmentList.add(getOkJudgment());
-		pinionShaftProductOkNgJudgmentList.add(getNgJudgment());
-		return pinionShaftProductOkNgJudgmentList;
+	public PinionShaftProductionValue pinionShaftProductOkNgJudgment() throws ParseException {
+		PinionShaftProductionValue pinionShaftProductOkNgJudgment = new PinionShaftProductionValue();
+		pinionShaftProductOkNgJudgment.setInfoProductionData(machineController.getProductionTargetData());
+		pinionShaftProductOkNgJudgment.setOkProductionData(getOkJudgment());
+		pinionShaftProductOkNgJudgment.setNgProductionData(getNgJudgment());
+		return pinionShaftProductOkNgJudgment;
 	}
 	
 	public String firstTwo(String str) {
