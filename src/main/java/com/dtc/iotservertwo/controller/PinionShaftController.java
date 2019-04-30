@@ -54,12 +54,12 @@ public class PinionShaftController {
 		return pinionShaftObj;
 	}
 	
-	@GetMapping("pinionshaftmeasurevalueleft")
+	@GetMapping("pinionshaft-left")
 	public List<PinionShaftMeasureValue> getMeasureValueLeft() {
 		return pinionShaftRepository.findBySideAndReturnMeasureValueAndTime(0, PageRequest.of(0, 50, Sort.by(Direction.DESC, "time")));
 	}
 	
-	@GetMapping("pinionshaftmeasurevalueright")
+	@GetMapping("pinionshaft-right")
 	public List<PinionShaftMeasureValue> getMeasureValueRight() {
 		return pinionShaftRepository.findBySideAndReturnMeasureValueAndTime(1,PageRequest.of(0, 50, Sort.by(Direction.DESC, "time")));
 	}
@@ -72,7 +72,7 @@ public class PinionShaftController {
 		return pinionLeftRightMeasureValue;
 	}
 	
-	@GetMapping("pinionshaft-judgment")
+	@GetMapping("pinionshaft-judg")
 	public List<PinionShaftJudgmentValue> getJudgmentValue() throws ParseException {
 		
 		Date date = new Date();
@@ -83,7 +83,7 @@ public class PinionShaftController {
 		return pinionShaftRepository.findByTime(dateFormat.parse(todayDayStr + "T" + pinionShaftProductionInfo.get(0).getStartHour()), dateFormat.parse(todayDayStr + "T" + pinionShaftProductionInfo.get(0).getStopHour()));
 	}
 	
-	@GetMapping("pinionshaft-judgment-ok")
+	@GetMapping("pinionshaft-judg-ok")
 	public List<MachineProductionData> getOkJudgment() throws ParseException {
 		
 		List<MachineProductionData> pinionShaftProductionOkJudgmentList = new ArrayList<MachineProductionData>();
@@ -117,7 +117,7 @@ public class PinionShaftController {
 		return pinionShaftProductionOkJudgmentList;
 	}
 	
-	@GetMapping("pinionshaft-judgment-ng")
+	@GetMapping("pinionshaft-judg-ng")
 	public List<MachineProductionData> getNgJudgment() throws ParseException {
 		
 		List<MachineProductionData> pinionShaftProductionNgJudgmentList = new ArrayList<MachineProductionData>();
@@ -152,7 +152,7 @@ public class PinionShaftController {
 		return pinionShaftProductionNgJudgmentList;
 	}
 	
-	@GetMapping("pinionshaft-judgment-ok-ng")
+	@GetMapping("pinionshaft-judg-ok-ng")
 	public PinionShaftProductionValue pinionShaftProductOkNgJudgment() throws ParseException {
 		PinionShaftProductionValue pinionShaftProductOkNgJudgment = new PinionShaftProductionValue();
 		pinionShaftProductOkNgJudgment.setInfoProductionData(machineController.getProductionTargetData());

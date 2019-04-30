@@ -29,7 +29,7 @@ public class MachineController {
 		return machinesRepository.findAll();
 	}
 	
-	@GetMapping("production-info")
+	@GetMapping("pinionshaft-production-info")
 	public List<MachineProductionData> getProductionTargetData() throws ParseException {
 		Date date = new Date();
 		SimpleDateFormat todayDayFormat = new SimpleDateFormat("yyyy-MM-dd");
