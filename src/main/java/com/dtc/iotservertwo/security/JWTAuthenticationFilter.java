@@ -19,6 +19,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.auth0.jwt.JWT;
 import com.dtc.iotservertwo.model.ApplicationUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.dtc.iotservertwo.security.SecurityConstants.EXPIRATION_TIME;
@@ -41,7 +43,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			ApplicationUser creds = new ObjectMapper().readValue(request.getInputStream(), ApplicationUser.class);
 			return authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(
-							creds.getUsername(), 
+							creds.getUsername(),
 							creds.getPassword(), 
 							new ArrayList<>()
 							)
@@ -53,13 +55,19 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-			Authentication authResult) throws IOException, ServletException {
+			Authentication authResult) throws IOException, ServletException {        
+		ApplicationUser authUser = new ApplicationUser();
 		Date expirationTime = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
 		String token = JWT.create()
 				.withSubject(((User) authResult.getPrincipal()).getUsername())
 				.withExpiresAt(expirationTime)
 				.sign(HMAC512(SECRET.getBytes()));
+		authUser.setUsername(((User) authResult.getPrincipal()).getUsername());
+		authUser.setToken(token);
 		response.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(new Gson().toJson(authUser));
 	}
 	
 	
