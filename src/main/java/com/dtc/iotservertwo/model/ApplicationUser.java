@@ -14,5 +14,6 @@ public class ApplicationUser {
 	private String password;
 	private String userId;
 	private String token;
+	private String email;
 	
 }
