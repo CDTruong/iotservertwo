@@ -20,8 +20,6 @@ import com.auth0.jwt.JWT;
 import com.dtc.iotservertwo.model.ApplicationUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.dtc.iotservertwo.security.SecurityConstants.EXPIRATION_TIME;
 import static com.dtc.iotservertwo.security.SecurityConstants.HEADER_STRING;

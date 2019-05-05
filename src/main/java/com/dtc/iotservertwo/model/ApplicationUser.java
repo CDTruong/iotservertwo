@@ -10,6 +10,7 @@ import lombok.Setter;
 @Document(collection = "application-user")
 public class ApplicationUser {
 	
+	private String name;
 	private String username;
 	private String password;
 	private String userId;
