@@ -15,4 +15,7 @@ public interface MachinesRepository extends MongoRepository<Machine, String> {
 	@Query(value="{'machineId' : ?0}", fields="{ _id: 0, startHour: 1, stopHour: 1, targetOfDay: 1}")
 	public List<MachineProductionInfo> findByMachineIdAndReturnStartHourAndStopHourAndTargetOfDay(String machineId);
 
+	@Query("{'machineId' : ?0 }") 
+	public Machine findByMachineId(String machineId);
+	
 }
