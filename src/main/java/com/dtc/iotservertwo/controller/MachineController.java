@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,6 +53,14 @@ public class MachineController {
 		productionDataList.add(productionDataStopTarget);
 		
 		return productionDataList;
+	}
+	
+	@PostMapping("operation-status")
+	public Machine updateOperationStatus(@RequestBody Machine machine) {
+		Machine readyUpdateMachine = machinesRepository.findByMachineId(machine.getMachineId());
+		readyUpdateMachine.setOpStatus(machine.getOpStatus());
+		machinesRepository.save(readyUpdateMachine);
+		return readyUpdateMachine;
 	}
 
 }
