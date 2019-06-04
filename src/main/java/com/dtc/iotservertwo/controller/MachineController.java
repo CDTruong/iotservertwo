@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,12 @@ public class MachineController {
 	@GetMapping("machines")
 	public List<Machine> get() {
 		return machinesRepository.findAll();
+	}
+	
+	@GetMapping("machine/{id}")
+	public Machine getMachineById(@PathVariable("id") String id) {
+		Machine machineById = machinesRepository.findByMachineId(id);
+		return machineById;
 	}
 	
 	@GetMapping("pinionshaft-production-info")
