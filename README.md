@@ -17,3 +17,5 @@ Record and tracking production per unit time period.
 Production manager can monitor production rate and use that data for production planning more effectively.
 ![alt text](https://github.com/CDTruong/iotservertwo/blob/master/sample-img/production-chart.png)
 
+## Demo
+![](https://github.com/CDTruong/iotservertwo/blob/master/sample-img/user-interface.gif)
