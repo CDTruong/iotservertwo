@@ -1,2 +1,3 @@
 # iotservertwo
-Pinion Shaft Measuring Machine Monitor Server Application using Spring Framework
+iotservertwo is a part of the Pinion Shaft Measuring Machine Monitor Application that used Spring Framework for server application.
+
