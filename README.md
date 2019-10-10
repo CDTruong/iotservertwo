@@ -20,4 +20,4 @@ Production manager can monitor production rate and use that data for production 
 ## Demo
 ![](https://github.com/CDTruong/iotservertwo/blob/master/sample-img/user-interface.gif)
 
-[front-end application]: 
+[front-end application]: https://github.com/truong-chi-dung/iot-angular-v-four
